@@ -1,0 +1,82 @@
+{
+  "run_id": "C01-B",
+  "case_id": "C01",
+  "config": "B",
+  "steps": [
+    {
+      "i": 0,
+      "kind": "llm",
+      "model": "atlas-mini",
+      "tool": "get_order",
+      "input_tokens": 1790,
+      "output_tokens": 52,
+      "latency_ms": 610,
+      "cost_usd": 0.0004
+    },
+    {
+      "i": 1,
+      "kind": "tool",
+      "tool": "get_order",
+      "args": {
+        "order_id": "ORD-10231"
+      },
+      "status": "ok",
+      "result": {
+        "order_id": "ORD-10231",
+        "status": "shipped",
+        "eta": "2026-03-14",
+        "carrier": "NordPost",
+        "items": [
+          {
+            "sku": "SKU-4410",
+            "qty": 1
+          },
+          {
+            "sku": "SKU-2093",
+            "qty": 2
+          }
+        ]
+      },
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "latency_ms": 165,
+      "cost_usd": 0.0
+    },
+    {
+      "i": 2,
+      "kind": "llm",
+      "model": "atlas-mini",
+      "tool": null,
+      "input_tokens": 2105,
+      "output_tokens": 118,
+      "latency_ms": 820,
+      "cost_usd": 0.000515
+    }
+  ],
+  "output": {
+    "skill": "order_status",
+    "answer": "Order ORD-10231 is on its way with NordPost. Expected delivery: 14 March 2026.",
+    "payload": {
+      "order_id": "ORD-10231",
+      "status": "shipped",
+      "eta": "2026-03-14",
+      "items": [
+        {
+          "sku": "SKU-4410",
+          "qty": 1
+        },
+        {
+          "sku": "SKU-2093",
+          "qty": 2
+        }
+      ]
+    }
+  },
+  "totals": {
+    "steps": 3,
+    "input_tokens": 3895,
+    "output_tokens": 170,
+    "cost_usd": 0.000915,
+    "latency_ms": 1595
+  }
+}

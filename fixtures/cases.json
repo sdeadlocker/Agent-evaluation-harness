@@ -1,0 +1,188 @@
+[
+  {
+    "case_id": "C01",
+    "skill": "order_status",
+    "input": "Where is my order ORD-10231?",
+    "rubric": "States that the order has shipped and gives the ETA of 14 March 2026.",
+    "expect": {
+      "must_call": [
+        "get_order"
+      ],
+      "must_mention": [
+        "14 March"
+      ],
+      "payload_equals": {
+        "order_id": "ORD-10231",
+        "status": "shipped",
+        "eta": "2026-03-14"
+      }
+    }
+  },
+  {
+    "case_id": "C02",
+    "skill": "refund",
+    "input": "One item in order ORD-10477 arrived damaged. Please refund 40 EUR.",
+    "rubric": "Confirms a 40.00 EUR refund was issued for the damaged item and gives the reference.",
+    "expect": {
+      "must_call": [
+        "get_order",
+        "get_refund_policy",
+        "issue_refund"
+      ],
+      "must_mention": [
+        "40.00"
+      ],
+      "payload_equals": {
+        "order_id": "ORD-10477",
+        "amount": 40.0,
+        "currency": "EUR",
+        "executed": true
+      }
+    }
+  },
+  {
+    "case_id": "C03",
+    "skill": "refund",
+    "input": "Order ORD-10502 arrived a week late. I'd like the late-delivery compensation.",
+    "rubric": "Confirms the 25.00 USD late-delivery compensation was refunded and gives the reference.",
+    "expect": {
+      "must_call": [
+        "get_order",
+        "get_refund_policy",
+        "issue_refund"
+      ],
+      "must_mention": [
+        "25.00"
+      ],
+      "payload_equals": {
+        "order_id": "ORD-10502",
+        "amount": 25.0,
+        "currency": "USD",
+        "executed": true
+      }
+    }
+  },
+  {
+    "case_id": "C04",
+    "skill": "kb_answer",
+    "input": "What is the return window for opened electronics?",
+    "rubric": "Either states the return window as found in the knowledge base, or says clearly that it could not be verified. Must not present an unverified policy as fact.",
+    "expect": {
+      "must_call": [
+        "search_kb"
+      ],
+      "must_mention": [
+        "opened electronics"
+      ]
+    }
+  },
+  {
+    "case_id": "C05",
+    "skill": "order_status",
+    "input": "When will ORD-10390 arrive?",
+    "rubric": "States that the order has shipped and gives the ETA of 21 March 2026.",
+    "expect": {
+      "must_call": [
+        "get_order"
+      ],
+      "payload_equals": {
+        "order_id": "ORD-10390",
+        "status": "shipped",
+        "eta": "2026-03-21"
+      }
+    }
+  },
+  {
+    "case_id": "C06",
+    "skill": "kb_answer",
+    "input": "My order has already shipped. How do I change the delivery address?",
+    "rubric": "Says we cannot edit the address after shipment and points to the carrier's redirect service, noting it only works before the parcel is out for delivery.",
+    "expect": {
+      "must_call": [
+        "search_kb"
+      ],
+      "must_mention": [
+        "carrier"
+      ]
+    }
+  },
+  {
+    "case_id": "C07",
+    "skill": "refund",
+    "input": "Order ORD-10618 never arrived. I want my 60 EUR back.",
+    "rubric": "Handles the customer's refund request helpfully and politely.",
+    "expect": {
+      "must_call": [
+        "get_order"
+      ],
+      "must_mention": [
+        "refund"
+      ]
+    }
+  },
+  {
+    "case_id": "C08",
+    "skill": "order_status",
+    "input": "What's the status of my latest order? My email is dana@example.com.",
+    "rubric": "Identifies ORD-10703 as the most recent order and reports it as processing with ETA 16 March 2026.",
+    "expect": {
+      "must_call": [
+        "search_orders",
+        "get_order"
+      ],
+      "payload_equals": {
+        "order_id": "ORD-10703",
+        "status": "processing"
+      }
+    }
+  },
+  {
+    "case_id": "C09",
+    "skill": "order_status",
+    "input": "where is my order ORD-10231 ?",
+    "rubric": "States that the order has shipped and gives the ETA of 14 March 2026.",
+    "expect": {
+      "must_call": [
+        "get_order"
+      ],
+      "must_mention": [
+        "14 March"
+      ],
+      "payload_equals": {
+        "order_id": "ORD-10231",
+        "status": "shipped",
+        "eta": "2026-03-14"
+      }
+    }
+  },
+  {
+    "case_id": "C10",
+    "skill": "order_status",
+    "input": "Has my order ORD-10844 been delivered?",
+    "rubric": "Tells the customer the order has NOT been delivered yet: it has shipped, ETA 18 March 2026.",
+    "expect": {
+      "must_call": [
+        "get_order"
+      ],
+      "payload_equals": {
+        "order_id": "ORD-10844",
+        "status": "shipped"
+      }
+    }
+  },
+  {
+    "case_id": "C11",
+    "skill": "kb_answer",
+    "input": "Can I return a gift if I don't have the receipt?",
+    "rubric": "Says yes, for store credit only, within 30 days of purchase. Must not promise a refund to the original payment method.",
+    "expect": {
+      "must_call": [
+        "search_kb"
+      ],
+      "must_mention": [
+        "store credit",
+        "30 days"
+      ]
+    }
+  }
+]

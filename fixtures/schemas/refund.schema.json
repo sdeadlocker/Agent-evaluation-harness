@@ -1,0 +1,56 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "refund payload",
+  "type": "object",
+  "required": [
+    "order_id",
+    "amount",
+    "currency",
+    "executed"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "order_id": {
+      "type": "string",
+      "pattern": "^ORD-\\d{5}$"
+    },
+    "amount": {
+      "type": "number",
+      "exclusiveMinimum": 0
+    },
+    "currency": {
+      "enum": [
+        "EUR",
+        "USD",
+        "NOK"
+      ]
+    },
+    "refund_id": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "pattern": "^RF-\\d{5}$"
+    },
+    "executed": {
+      "type": "boolean"
+    }
+  },
+  "if": {
+    "properties": {
+      "executed": {
+        "const": true
+      }
+    }
+  },
+  "then": {
+    "required": [
+      "refund_id"
+    ],
+    "properties": {
+      "refund_id": {
+        "type": "string"
+      }
+    }
+  }
+}

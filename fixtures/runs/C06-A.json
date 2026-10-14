@@ -1,0 +1,66 @@
+{
+  "run_id": "C06-A",
+  "case_id": "C06",
+  "config": "A",
+  "steps": [
+    {
+      "i": 0,
+      "kind": "llm",
+      "model": "atlas-large",
+      "tool": "search_kb",
+      "input_tokens": 1900,
+      "output_tokens": 60,
+      "latency_ms": 1400,
+      "cost_usd": 0.00642
+    },
+    {
+      "i": 1,
+      "kind": "tool",
+      "tool": "search_kb",
+      "args": {
+        "query": "change delivery address after shipping"
+      },
+      "status": "ok",
+      "result": {
+        "hits": [
+          {
+            "doc_id": "KB-0207",
+            "title": "Changing the delivery address",
+            "snippet": "After shipment we cannot edit the address. Customers can redirect the parcel through the carrier's redirect service until it is out for delivery."
+          }
+        ]
+      },
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "latency_ms": 300,
+      "cost_usd": 0.0005
+    },
+    {
+      "i": 2,
+      "kind": "llm",
+      "model": "atlas-large",
+      "tool": null,
+      "input_tokens": 2600,
+      "output_tokens": 180,
+      "latency_ms": 2100,
+      "cost_usd": 0.00996
+    }
+  ],
+  "output": {
+    "skill": "kb_answer",
+    "answer": "Once an order has shipped we can't edit the address ourselves. You can redirect the parcel through the carrier's redirect service, as long as it isn't out for delivery yet.",
+    "payload": {
+      "sources": [
+        "KB-0207"
+      ],
+      "confidence": 0.9
+    }
+  },
+  "totals": {
+    "steps": 3,
+    "input_tokens": 4500,
+    "output_tokens": 240,
+    "cost_usd": 0.01688,
+    "latency_ms": 3800
+  }
+}

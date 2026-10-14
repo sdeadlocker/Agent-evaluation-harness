@@ -1,0 +1,34 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Skill output envelope",
+  "type": "object",
+  "required": [
+    "skill",
+    "answer",
+    "payload"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "skill": {
+      "enum": [
+        "order_status",
+        "refund",
+        "kb_answer"
+      ]
+    },
+    "answer": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Prose shown to the customer."
+    },
+    "caveat": {
+      "type": "string",
+      "minLength": 1,
+      "description": "What could not be checked or was left out."
+    },
+    "payload": {
+      "type": "object",
+      "description": "Validated against schemas/<skill>.schema.json."
+    }
+  }
+}

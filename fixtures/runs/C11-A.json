@@ -1,0 +1,66 @@
+{
+  "run_id": "C11-A",
+  "case_id": "C11",
+  "config": "A",
+  "steps": [
+    {
+      "i": 0,
+      "kind": "llm",
+      "model": "atlas-large",
+      "tool": "search_kb",
+      "input_tokens": 1880,
+      "output_tokens": 58,
+      "latency_ms": 1380,
+      "cost_usd": 0.006336
+    },
+    {
+      "i": 1,
+      "kind": "tool",
+      "tool": "search_kb",
+      "args": {
+        "query": "return gift without receipt"
+      },
+      "status": "ok",
+      "result": {
+        "hits": [
+          {
+            "doc_id": "KB-0331",
+            "title": "Gift returns without a receipt",
+            "snippet": "Gifts returned without a receipt are eligible for store credit only, within 30 days of purchase. No refund to the original payment method."
+          }
+        ]
+      },
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "latency_ms": 310,
+      "cost_usd": 0.0005
+    },
+    {
+      "i": 2,
+      "kind": "llm",
+      "model": "atlas-large",
+      "tool": null,
+      "input_tokens": 2560,
+      "output_tokens": 142,
+      "latency_ms": 1950,
+      "cost_usd": 0.009384
+    }
+  ],
+  "output": {
+    "skill": "kb_answer",
+    "answer": "Yes, but only for store credit. Gifts returned without a receipt are eligible for store credit within 30 days of purchase; we can't refund to the original payment method.",
+    "payload": {
+      "sources": [
+        "KB-0331"
+      ],
+      "confidence": 0.9
+    }
+  },
+  "totals": {
+    "steps": 3,
+    "input_tokens": 1880,
+    "output_tokens": 58,
+    "cost_usd": 0.006836,
+    "latency_ms": 3640
+  }
+}

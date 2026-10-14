@@ -1,0 +1,134 @@
+{
+  "run_id": "C02-B",
+  "case_id": "C02",
+  "config": "B",
+  "steps": [
+    {
+      "i": 0,
+      "kind": "llm",
+      "model": "atlas-mini",
+      "tool": "get_order",
+      "input_tokens": 1920,
+      "output_tokens": 47,
+      "latency_ms": 590,
+      "cost_usd": 0.000422
+    },
+    {
+      "i": 1,
+      "kind": "tool",
+      "tool": "get_order",
+      "args": {
+        "order_id": "ORD-10477"
+      },
+      "status": "ok",
+      "result": {
+        "order_id": "ORD-10477",
+        "status": "delivered",
+        "delivered_on": "2026-02-27",
+        "total": 129.0,
+        "currency": "EUR",
+        "items": [
+          {
+            "sku": "SKU-7781",
+            "qty": 1
+          }
+        ]
+      },
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "latency_ms": 185,
+      "cost_usd": 0.0
+    },
+    {
+      "i": 2,
+      "kind": "llm",
+      "model": "atlas-mini",
+      "tool": "get_refund_policy",
+      "input_tokens": 2350,
+      "output_tokens": 55,
+      "latency_ms": 640,
+      "cost_usd": 0.000514
+    },
+    {
+      "i": 3,
+      "kind": "tool",
+      "tool": "get_refund_policy",
+      "args": {
+        "reason": "damaged_item"
+      },
+      "status": "ok",
+      "result": {
+        "reason": "damaged_item",
+        "eligible": true,
+        "window_days": 30,
+        "max_amount_without_return": 50.0,
+        "currency": "EUR"
+      },
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "latency_ms": 150,
+      "cost_usd": 0.0
+    },
+    {
+      "i": 4,
+      "kind": "llm",
+      "model": "atlas-mini",
+      "tool": "issue_refund",
+      "input_tokens": 2690,
+      "output_tokens": 66,
+      "latency_ms": 700,
+      "cost_usd": 0.000591
+    },
+    {
+      "i": 5,
+      "kind": "tool",
+      "tool": "issue_refund",
+      "args": {
+        "order_id": "ORD-10477",
+        "amount": 40.0,
+        "currency": "EUR"
+      },
+      "status": "ok",
+      "result": {
+        "refund_id": "RF-88137",
+        "order_id": "ORD-10477",
+        "amount": 40.0,
+        "currency": "EUR",
+        "status": "issued",
+        "settles_in_business_days": 5
+      },
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "latency_ms": 410,
+      "cost_usd": 0.0
+    },
+    {
+      "i": 6,
+      "kind": "llm",
+      "model": "atlas-mini",
+      "tool": null,
+      "input_tokens": 2990,
+      "output_tokens": 114,
+      "latency_ms": 860,
+      "cost_usd": 0.000689
+    }
+  ],
+  "output": {
+    "skill": "refund",
+    "answer": "I've issued a refund of 40.00 EUR for the damaged item on order ORD-10477. Reference RF-88137. It should reach your account within 5 business days.",
+    "payload": {
+      "order_id": "ORD-10477",
+      "amount": 40.0,
+      "currency": "EUR",
+      "refund_id": "RF-88137",
+      "executed": true
+    }
+  },
+  "totals": {
+    "steps": 7,
+    "input_tokens": 9950,
+    "output_tokens": 282,
+    "cost_usd": 0.002216,
+    "latency_ms": 3535
+  }
+}

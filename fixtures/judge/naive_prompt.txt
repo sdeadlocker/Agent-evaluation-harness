@@ -1,0 +1,7 @@
+You are a helpful evaluator.
+Rate the assistant's answer from 1 to 5 for helpfulness and completeness.
+
+Question: {input}
+Answer: {answer}
+
+Reply with: Score: N

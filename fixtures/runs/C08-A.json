@@ -1,0 +1,183 @@
+{
+  "run_id": "C08-A",
+  "case_id": "C08",
+  "config": "A",
+  "steps": [
+    {
+      "i": 0,
+      "kind": "llm",
+      "model": "atlas-large",
+      "tool": "search_orders",
+      "input_tokens": 1850,
+      "output_tokens": 49,
+      "latency_ms": 1220,
+      "cost_usd": 0.006138
+    },
+    {
+      "i": 1,
+      "kind": "tool",
+      "tool": "search_orders",
+      "args": {
+        "email": "dana@example.com"
+      },
+      "status": "ok",
+      "result": {
+        "orders": [
+          {
+            "order_id": "ORD-10701",
+            "created": "2026-01-12"
+          },
+          {
+            "order_id": "ORD-10702",
+            "created": "2026-02-03"
+          },
+          {
+            "order_id": "ORD-10703",
+            "created": "2026-03-01"
+          }
+        ]
+      },
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "latency_ms": 240,
+      "cost_usd": 0.0
+    },
+    {
+      "i": 2,
+      "kind": "llm",
+      "model": "atlas-large",
+      "tool": "get_order",
+      "input_tokens": 2210,
+      "output_tokens": 47,
+      "latency_ms": 1180,
+      "cost_usd": 0.007194
+    },
+    {
+      "i": 3,
+      "kind": "tool",
+      "tool": "get_order",
+      "args": {
+        "order_id": "ORD-10701"
+      },
+      "status": "ok",
+      "result": {
+        "order_id": "ORD-10701",
+        "status": "delivered",
+        "eta": "2026-01-16",
+        "created": "2026-01-12",
+        "items": [
+          {
+            "sku": "SKU-0701",
+            "qty": 1
+          }
+        ]
+      },
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "latency_ms": 180,
+      "cost_usd": 0.0
+    },
+    {
+      "i": 4,
+      "kind": "llm",
+      "model": "atlas-large",
+      "tool": "get_order",
+      "input_tokens": 2540,
+      "output_tokens": 46,
+      "latency_ms": 1210,
+      "cost_usd": 0.008172
+    },
+    {
+      "i": 5,
+      "kind": "tool",
+      "tool": "get_order",
+      "args": {
+        "order_id": "ORD-10702"
+      },
+      "status": "ok",
+      "result": {
+        "order_id": "ORD-10702",
+        "status": "delivered",
+        "eta": "2026-02-07",
+        "created": "2026-02-03",
+        "items": [
+          {
+            "sku": "SKU-0702",
+            "qty": 3
+          }
+        ]
+      },
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "latency_ms": 175,
+      "cost_usd": 0.0
+    },
+    {
+      "i": 6,
+      "kind": "llm",
+      "model": "atlas-large",
+      "tool": "get_order",
+      "input_tokens": 2870,
+      "output_tokens": 48,
+      "latency_ms": 1260,
+      "cost_usd": 0.009186
+    },
+    {
+      "i": 7,
+      "kind": "tool",
+      "tool": "get_order",
+      "args": {
+        "order_id": "ORD-10703"
+      },
+      "status": "ok",
+      "result": {
+        "order_id": "ORD-10703",
+        "status": "processing",
+        "eta": "2026-03-16",
+        "created": "2026-03-01",
+        "items": [
+          {
+            "sku": "SKU-0703",
+            "qty": 1
+          }
+        ]
+      },
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "latency_ms": 185,
+      "cost_usd": 0.0
+    },
+    {
+      "i": 8,
+      "kind": "llm",
+      "model": "atlas-large",
+      "tool": null,
+      "input_tokens": 3200,
+      "output_tokens": 126,
+      "latency_ms": 1840,
+      "cost_usd": 0.011112
+    }
+  ],
+  "output": {
+    "skill": "order_status",
+    "answer": "Your latest order is ORD-10703, placed on 1 March 2026. It is still being processed and is expected on 16 March 2026.",
+    "payload": {
+      "order_id": "ORD-10703",
+      "status": "processing",
+      "eta": "2026-03-16",
+      "items": [
+        {
+          "sku": "SKU-0703",
+          "qty": 1
+        }
+      ]
+    }
+  },
+  "totals": {
+    "steps": 9,
+    "input_tokens": 12670,
+    "output_tokens": 316,
+    "cost_usd": 0.041802,
+    "latency_ms": 7490
+  }
+}

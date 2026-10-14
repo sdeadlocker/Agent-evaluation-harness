@@ -1,0 +1,38 @@
+{
+  "get_order": {
+    "description": "Fetch one order by id.",
+    "write": false,
+    "requires_checkpoint": false,
+    "cost_usd_per_call": 0.0
+  },
+  "search_orders": {
+    "description": "List a customer's orders by email.",
+    "write": false,
+    "requires_checkpoint": false,
+    "cost_usd_per_call": 0.0
+  },
+  "search_kb": {
+    "description": "Search the policy knowledge base.",
+    "write": false,
+    "requires_checkpoint": false,
+    "cost_usd_per_call": 0.0005
+  },
+  "get_refund_policy": {
+    "description": "Look up refund rules for a reason code.",
+    "write": false,
+    "requires_checkpoint": false,
+    "cost_usd_per_call": 0.0
+  },
+  "issue_refund": {
+    "description": "Pay out a refund. Irreversible.",
+    "write": true,
+    "requires_checkpoint": true,
+    "cost_usd_per_call": 0.0
+  },
+  "cancel_order": {
+    "description": "Cancel an order. Irreversible.",
+    "write": true,
+    "requires_checkpoint": true,
+    "cost_usd_per_call": 0.0
+  }
+}

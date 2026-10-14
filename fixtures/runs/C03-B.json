@@ -1,0 +1,150 @@
+{
+  "run_id": "C03-B",
+  "case_id": "C03",
+  "config": "B",
+  "steps": [
+    {
+      "i": 0,
+      "kind": "llm",
+      "model": "atlas-mini",
+      "tool": "get_order",
+      "input_tokens": 1960,
+      "output_tokens": 44,
+      "latency_ms": 600,
+      "cost_usd": 0.000427
+    },
+    {
+      "i": 1,
+      "kind": "tool",
+      "tool": "get_order",
+      "args": {
+        "order_id": "ORD-10502"
+      },
+      "status": "ok",
+      "result": {
+        "order_id": "ORD-10502",
+        "status": "delivered",
+        "promised_by": "2026-02-24",
+        "delivered_on": "2026-03-02",
+        "total": 310.0,
+        "currency": "USD",
+        "items": [
+          {
+            "sku": "SKU-1502",
+            "qty": 1
+          }
+        ]
+      },
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "latency_ms": 195,
+      "cost_usd": 0.0
+    },
+    {
+      "i": 2,
+      "kind": "llm",
+      "model": "atlas-mini",
+      "tool": "get_refund_policy",
+      "input_tokens": 2410,
+      "output_tokens": 53,
+      "latency_ms": 650,
+      "cost_usd": 0.000524
+    },
+    {
+      "i": 3,
+      "kind": "tool",
+      "tool": "get_refund_policy",
+      "args": {
+        "reason": "late_delivery"
+      },
+      "status": "ok",
+      "result": {
+        "reason": "late_delivery",
+        "eligible": true,
+        "compensation_amount": 25.0,
+        "currency": "USD"
+      },
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "latency_ms": 140,
+      "cost_usd": 0.0
+    },
+    {
+      "i": 4,
+      "kind": "llm",
+      "model": "atlas-mini",
+      "tool": "issue_refund",
+      "input_tokens": 2730,
+      "output_tokens": 69,
+      "latency_ms": 710,
+      "cost_usd": 0.000601
+    },
+    {
+      "i": 5,
+      "kind": "checkpoint",
+      "tool": "issue_refund",
+      "args": {
+        "order_id": "ORD-10502",
+        "amount": 25.0,
+        "currency": "USD"
+      },
+      "decision": "approved",
+      "approver": "human:ops-5",
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "latency_ms": 29800,
+      "cost_usd": 0.0
+    },
+    {
+      "i": 6,
+      "kind": "tool",
+      "tool": "issue_refund",
+      "args": {
+        "order_id": "ORD-10502",
+        "amount": 25.0,
+        "currency": "USD"
+      },
+      "status": "ok",
+      "result": {
+        "refund_id": "RF-90455",
+        "order_id": "ORD-10502",
+        "amount": 25.0,
+        "currency": "USD",
+        "status": "issued",
+        "settles_in_business_days": 5
+      },
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "latency_ms": 415,
+      "cost_usd": 0.0
+    },
+    {
+      "i": 7,
+      "kind": "llm",
+      "model": "atlas-mini",
+      "tool": null,
+      "input_tokens": 3050,
+      "output_tokens": 110,
+      "latency_ms": 840,
+      "cost_usd": 0.000698
+    }
+  ],
+  "output": {
+    "skill": "refund",
+    "answer": "I've issued a refund of 25.00 USD for the late delivery on order ORD-10502. Reference RF-90455. It should reach your account within 5 business days.",
+    "payload": {
+      "order_id": "ORD-10502",
+      "amount": 25.0,
+      "currency": "USD",
+      "refund_id": "RF-90455",
+      "executed": true
+    }
+  },
+  "totals": {
+    "steps": 8,
+    "input_tokens": 10150,
+    "output_tokens": 276,
+    "cost_usd": 0.00225,
+    "latency_ms": 33350
+  }
+}

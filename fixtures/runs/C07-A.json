@@ -1,0 +1,149 @@
+{
+  "run_id": "C07-A",
+  "case_id": "C07",
+  "config": "A",
+  "steps": [
+    {
+      "i": 0,
+      "kind": "llm",
+      "model": "atlas-large",
+      "tool": "get_order",
+      "input_tokens": 1940,
+      "output_tokens": 45,
+      "latency_ms": 1200,
+      "cost_usd": 0.00636
+    },
+    {
+      "i": 1,
+      "kind": "tool",
+      "tool": "get_order",
+      "args": {
+        "order_id": "ORD-10618"
+      },
+      "status": "ok",
+      "result": {
+        "order_id": "ORD-10618",
+        "status": "shipped",
+        "eta": "2026-02-20",
+        "total": 60.0,
+        "currency": "EUR",
+        "items": [
+          {
+            "sku": "SKU-6180",
+            "qty": 1
+          }
+        ]
+      },
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "latency_ms": 180,
+      "cost_usd": 0.0
+    },
+    {
+      "i": 2,
+      "kind": "llm",
+      "model": "atlas-large",
+      "tool": "get_refund_policy",
+      "input_tokens": 2360,
+      "output_tokens": 51,
+      "latency_ms": 1220,
+      "cost_usd": 0.007692
+    },
+    {
+      "i": 3,
+      "kind": "tool",
+      "tool": "get_refund_policy",
+      "args": {
+        "reason": "not_received"
+      },
+      "status": "ok",
+      "result": {
+        "reason": "not_received",
+        "eligible": true,
+        "condition": "10 or more days past eta",
+        "max_amount": "order total"
+      },
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "latency_ms": 145,
+      "cost_usd": 0.0
+    },
+    {
+      "i": 4,
+      "kind": "llm",
+      "model": "atlas-large",
+      "tool": "issue_refund",
+      "input_tokens": 2700,
+      "output_tokens": 70,
+      "latency_ms": 1400,
+      "cost_usd": 0.00894
+    },
+    {
+      "i": 5,
+      "kind": "checkpoint",
+      "tool": "issue_refund",
+      "args": {
+        "order_id": "ORD-10618",
+        "amount": 60.0,
+        "currency": "EUR"
+      },
+      "decision": "approved",
+      "approver": "human:ops-2",
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "latency_ms": 44100,
+      "cost_usd": 0.0
+    },
+    {
+      "i": 6,
+      "kind": "tool",
+      "tool": "issue_refund",
+      "args": {
+        "order_id": "ORD-10618",
+        "amount": 60.0,
+        "currency": "EUR"
+      },
+      "status": "ok",
+      "result": {
+        "refund_id": "RF-91770",
+        "order_id": "ORD-10618",
+        "amount": 60.0,
+        "currency": "EUR",
+        "status": "issued",
+        "settles_in_business_days": 5
+      },
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "latency_ms": 425,
+      "cost_usd": 0.0
+    },
+    {
+      "i": 7,
+      "kind": "llm",
+      "model": "atlas-large",
+      "tool": null,
+      "input_tokens": 3010,
+      "output_tokens": 117,
+      "latency_ms": 1730,
+      "cost_usd": 0.010434
+    }
+  ],
+  "output": {
+    "skill": "refund",
+    "answer": "I've issued a refund of 60.00 EUR for the parcel that never arrived on order ORD-10618. Reference RF-91770. It should reach your account within 5 business days.",
+    "payload": {
+      "order_id": "ORD-10618",
+      "amount": 60.0,
+      "currency": "EUR",
+      "refund_id": "RF-91770",
+      "executed": true
+    }
+  },
+  "totals": {
+    "steps": 8,
+    "input_tokens": 10010,
+    "output_tokens": 283,
+    "cost_usd": 0.033426,
+    "latency_ms": 50400
+  }
+}

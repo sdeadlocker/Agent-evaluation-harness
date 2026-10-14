@@ -1,0 +1,87 @@
+{
+  "run_id": "C04-A",
+  "case_id": "C04",
+  "config": "A",
+  "steps": [
+    {
+      "i": 0,
+      "kind": "llm",
+      "model": "atlas-large",
+      "tool": "search_kb",
+      "input_tokens": 1760,
+      "output_tokens": 41,
+      "latency_ms": 1150,
+      "cost_usd": 0.005772
+    },
+    {
+      "i": 1,
+      "kind": "tool",
+      "tool": "search_kb",
+      "args": {
+        "query": "return window opened electronics"
+      },
+      "status": "error",
+      "result": {
+        "error": "timeout",
+        "message": "knowledge base did not respond within 8000 ms"
+      },
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "latency_ms": 8000,
+      "cost_usd": 0.0005
+    },
+    {
+      "i": 2,
+      "kind": "llm",
+      "model": "atlas-large",
+      "tool": "search_kb",
+      "input_tokens": 1890,
+      "output_tokens": 43,
+      "latency_ms": 1090,
+      "cost_usd": 0.006186
+    },
+    {
+      "i": 3,
+      "kind": "tool",
+      "tool": "search_kb",
+      "args": {
+        "query": "return window opened electronics"
+      },
+      "status": "error",
+      "result": {
+        "error": "timeout",
+        "message": "knowledge base did not respond within 8000 ms"
+      },
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "latency_ms": 8000,
+      "cost_usd": 0.0005
+    },
+    {
+      "i": 4,
+      "kind": "llm",
+      "model": "atlas-large",
+      "tool": null,
+      "input_tokens": 2020,
+      "output_tokens": 96,
+      "latency_ms": 1540,
+      "cost_usd": 0.007212
+    }
+  ],
+  "output": {
+    "skill": "kb_answer",
+    "answer": "I couldn't confirm the return window for opened electronics just now because our policy lookup is unavailable. I don't want to guess, so please check back shortly or ask a colleague in support to confirm before you send the item back.",
+    "caveat": "Knowledge base search timed out twice. The return window was not verified.",
+    "payload": {
+      "sources": [],
+      "confidence": 0.2
+    }
+  },
+  "totals": {
+    "steps": 5,
+    "input_tokens": 5670,
+    "output_tokens": 180,
+    "cost_usd": 0.02017,
+    "latency_ms": 19780
+  }
+}

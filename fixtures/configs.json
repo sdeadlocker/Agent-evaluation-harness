@@ -1,0 +1,12 @@
+{
+  "A": {
+    "label": "baseline",
+    "model": "atlas-large",
+    "prompt_version": "v3"
+  },
+  "B": {
+    "label": "candidate",
+    "model": "atlas-mini",
+    "prompt_version": "v4"
+  }
+}

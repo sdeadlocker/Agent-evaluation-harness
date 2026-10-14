@@ -1,0 +1,13 @@
+{
+  "unit": "usd_per_1m_tokens",
+  "models": {
+    "atlas-large": {
+      "input": 3.0,
+      "output": 12.0
+    },
+    "atlas-mini": {
+      "input": 0.2,
+      "output": 0.8
+    }
+  }
+}

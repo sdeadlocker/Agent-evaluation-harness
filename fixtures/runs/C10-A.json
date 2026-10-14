@@ -1,0 +1,74 @@
+{
+  "run_id": "C10-A",
+  "case_id": "C10",
+  "config": "A",
+  "steps": [
+    {
+      "i": 0,
+      "kind": "llm",
+      "model": "atlas-large",
+      "tool": "get_order",
+      "input_tokens": 1830,
+      "output_tokens": 46,
+      "latency_ms": 1240,
+      "cost_usd": 0.006042
+    },
+    {
+      "i": 1,
+      "kind": "tool",
+      "tool": "get_order",
+      "args": {
+        "order_id": "ORD-10844"
+      },
+      "status": "ok",
+      "result": {
+        "order_id": "ORD-10844",
+        "status": "shipped",
+        "eta": "2026-03-18",
+        "carrier": "NordPost",
+        "items": [
+          {
+            "sku": "SKU-8440",
+            "qty": 2
+          }
+        ]
+      },
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "latency_ms": 180,
+      "cost_usd": 0.0
+    },
+    {
+      "i": 2,
+      "kind": "llm",
+      "model": "atlas-large",
+      "tool": null,
+      "input_tokens": 2120,
+      "output_tokens": 115,
+      "latency_ms": 1760,
+      "cost_usd": 0.00774
+    }
+  ],
+  "output": {
+    "skill": "order_status",
+    "answer": "Not yet. Order ORD-10844 has shipped but has not been delivered. It is expected on 18 March 2026.",
+    "payload": {
+      "order_id": "ORD-10844",
+      "status": "shipped",
+      "eta": "18/03/2026",
+      "items": [
+        {
+          "sku": "SKU-8440",
+          "qty": 2
+        }
+      ]
+    }
+  },
+  "totals": {
+    "steps": 3,
+    "input_tokens": 3950,
+    "output_tokens": 161,
+    "cost_usd": 0.013782,
+    "latency_ms": 3180
+  }
+}
